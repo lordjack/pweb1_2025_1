@@ -20,10 +20,14 @@ include "./db.class.php";
 if (!empty($_POST)) {
 
     $db = new db('usuario');
-    
+
     $db->store($_POST);
 
     header('location:./UsuarioList.php');
+}
+
+if (!empty($_GET['id'])) {
+    $data = $db->find($_GET['id']);
 }
 ?>
 

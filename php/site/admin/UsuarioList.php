@@ -18,7 +18,15 @@ include "./db.class.php";
 
 $db = new db('usuario');
 
-$dados = $db->all();
+if (!empty($_GET['id'])) {
+    $db->destroy($_GET['id']);
+}
+
+if (!empty($_POST)) {
+    $dados = $db->search($_POST);
+} else {
+    $dados = $db->all();
+}
 
 ?>
 
@@ -27,17 +35,19 @@ $dados = $db->all();
         <div class="row">
             <h3>Listagem Usuário</h3>
             <!-- http://localhost/pweb1_2025_1/php/site/admin/UsuarioList.php -->
-            <form action="" method="post">
+            <form action="./UsuarioList.php" method="post">
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <label for="" class="form-label">Nome</label>
-                        <input type="text" name="nome" class="form-control">
+                    <div class="col-md-2">
+                        <select name="tipo" class="form-select">
+                            <option value="nome">Nome</option>
+                            <option value="cpf">CPF</option>
+                            <option value="telefone">Telefone</option>
+                        </select>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control">
+                        <input type="text" name="valor" placeholder="pesquisar..." class="form-control">
                     </div>
                 </div>
 
@@ -60,6 +70,8 @@ $dados = $db->all();
                         <th scope="col">CPF</th>
                         <th scope="col">Telefone</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Ação</th>
+                        <th scope="col">Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +84,14 @@ $dados = $db->all();
                             <td>$item->cpf</td>
                             <td>$item->telefone</td>
                             <td>$item->email</td>
+                            <td>
+                                <a href='./UsuarioForm.php?id=$item->id'>Editar</a>
+                            </td>
+                            <td>
+                                <a 
+                                    onclick='return confirm(\"Deseja Excluir?\")'
+                                    href='./UsuarioList.php?id=$item->id'>Deletar</a>
+                            </td>
                         </tr>
                         ";
                     }
