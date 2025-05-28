@@ -17,18 +17,28 @@ include "./db.class.php";
 
 <?php
 
+$db = new db('usuario');
+
 if (!empty($_POST)) {
 
-    $db = new db('usuario');
+    if (empty($_POST['id'])) {
 
-    $db->store($_POST);
+        $db->store($_POST);
+        header('location:./UsuarioList.php');
 
-    header('location:./UsuarioList.php');
+    } else {
+        $db->update($_POST);
+        header('location:./UsuarioList.php');
+    }
 }
 
 if (!empty($_GET['id'])) {
     $data = $db->find($_GET['id']);
 }
+//serve para depurar o codigo, ver o que tem dentro da variavel
+//var_dump($data, $_GET['id']);
+//para a execução do codigo na linha onde foi colocada
+//exit;
 ?>
 
 <body>
@@ -37,33 +47,36 @@ if (!empty($_GET['id'])) {
             <h3>Formulário Usuário</h3>
             <!-- http://localhost/pweb1_2025_1/php/site/admin/UsuarioForm.php -->
             <form action="" method="post">
+                <input type="hidden" name="id" value="<?= $data->id ?? '' ?>">
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="" class="form-label">Nome</label>
-                        <input type="text" name="nome" class="form-control">
+                        <input type="text" name="nome" value="<?php echo $data->nome ?? '' ?>" class="form-control">
                     </div>
 
                     <div class="col-md-6">
                         <label for="" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control">
+                        <input type="email" name="email" value="<?= $data->email ?? '' ?>" class="form-control">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="" class="form-label">CPF</label>
-                        <input type="text" name="cpf" class="form-control">
+                        <input type="text" name="cpf" value="<?= $data->cpf ?? '' ?>" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <label for="" class="form-label">Telefone</label>
-                        <input type="text" name="telefone" class="form-control">
+                        <input type="text" name="telefone" value="<?= $data->telefone ?? '' ?>" class="form-control">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col mt-4">
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" class="btn btn-primary">
+                            <?= !empty($_GET['id']) ? "Editar" : "Salvar" ?>
+                        </button>
                         <a href="./UsuarioList.php" class="btn btn-secondary">Voltar</a>
                     </div>
                 </div>

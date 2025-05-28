@@ -52,6 +52,7 @@ class db
 
     public function store($dados)
     {
+        unset($dados['id']); //remove o campo id 
         $conn = $this->conn();
 
         $sql = "INSERT INTO $this->table_name (";
@@ -109,7 +110,6 @@ class db
 
         $st = $conn->prepare($sql);
         $st->execute($arrayDados);
-
     }
 
     public function find($id)
