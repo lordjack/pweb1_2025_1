@@ -18,18 +18,18 @@ include "./db.class.php";
 <?php
 
 $db = new db('usuario');
+$data = null;
+$errors = [];
+$success = '';
 
 if (!empty($_POST)) {
 
     if (empty($_POST['id'])) {
-
         $db->store($_POST);
-        header('location:./UsuarioList.php');
-
     } else {
         $db->update($_POST);
-        header('location:./UsuarioList.php');
     }
+    header('location:./UsuarioList.php');
 }
 
 if (!empty($_GET['id'])) {
