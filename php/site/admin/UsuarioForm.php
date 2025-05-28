@@ -24,17 +24,51 @@ $success = '';
 
 if (!empty($_POST)) {
 
-    if (empty($_POST['id'])) {
-        $db->store($_POST);
-    } else {
-        $db->update($_POST);
+    //Sempre preserva os dados do POST para exibição
+    $data = (object) $_POST; //converte o vetor para objeto
+
+    //função trim remove espaços em branco do inicio e fim da string, 
+    if (empty(trim($_POST['nome']))) {
+        $errors[] = "<li>O nome é obrigatorio</li>";
     }
-    header('location:./UsuarioList.php');
+
+    if (empty(trim($_POST['email']))) {
+        $errors[] = "<li>O email é obrigatorio</li>";
+    }
+
+    if (empty(trim($_POST['cpf']))) {
+        $errors[] = "<li>O cpf é obrigatorio</li>";
+    }
+
+    if (empty(trim($_POST['telefone']))) {
+        $errors[] = "<li>O telefone é obrigatorio</li>";
+    }
+
+    if (empty($errors)) {
+        try {
+            if (empty($_POST['id'])) {
+                $db->store($_POST);
+                $success = "Registro criado com sucesso!";
+            } else {
+                $db->update($_POST);
+                $success = "Registro atualizado com sucesso!";
+            }
+            echo "<script>
+                    setTimeout(
+                        ()=> window.location.href = 'UsuarioList.php', 1500
+                    )
+                </script>";
+        } catch (Exception $e) {
+            $errors[] = $e->getMessage();
+        }
+    }
+
 }
 
 if (!empty($_GET['id'])) {
     $data = $db->find($_GET['id']);
 }
+
 //serve para depurar o codigo, ver o que tem dentro da variavel
 //var_dump($data, $_GET['id']);
 //para a execução do codigo na linha onde foi colocada
@@ -42,8 +76,28 @@ if (!empty($_GET['id'])) {
 ?>
 
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
+
+            <?php if (!empty($errors)) { ?>
+                <div class="alert alert-danger">
+                    <strong>Erro ao salvar</strong>
+                    <ul class="mb-0">
+                        <?php foreach ($errors as $error) { ?>
+                            <?= $error ?>
+                        <?php } ?>
+                    </ul>
+                </div>
+            <?php } ?>
+
+            <?php if (!empty($success)) { ?>
+                <div class="alert alert-success">
+                    <strong>
+                        <?= $success ?>
+                    </strong>
+                </div>
+            <?php } ?>
+
             <h3>Formulário Usuário</h3>
             <!-- http://localhost/pweb1_2025_1/php/site/admin/UsuarioForm.php -->
             <form action="" method="post">
