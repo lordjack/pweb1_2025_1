@@ -1,5 +1,5 @@
 <?php
-include "./db.class.php";
+include "../db.class.php";
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,11 @@ include "./db.class.php";
 
 <?php
 
-$db = new db('usuario');
+$db = new db('post');
+
+$dbCategoria = new db('categoria');
+$categorias = $dbCategoria->all();
+
 $data = null;
 $errors = [];
 $success = '';
@@ -28,20 +32,16 @@ if (!empty($_POST)) {
     $data = (object) $_POST; //converte o vetor para objeto
 
     //função trim remove espaços em branco do inicio e fim da string, 
-    if (empty(trim($_POST['nome']))) {
-        $errors[] = "<li>O nome é obrigatorio</li>";
+    if (empty(trim($_POST['titulo']))) {
+        $errors[] = "<li>O titulo é obrigatorio</li>";
     }
 
-    if (empty(trim($_POST['email']))) {
-        $errors[] = "<li>O email é obrigatorio</li>";
+    if (empty(trim($_POST['descricao']))) {
+        $errors[] = "<li>O descricao é obrigatorio</li>";
     }
 
-    if (empty(trim($_POST['cpf']))) {
-        $errors[] = "<li>O cpf é obrigatorio</li>";
-    }
-
-    if (empty(trim($_POST['telefone']))) {
-        $errors[] = "<li>O telefone é obrigatorio</li>";
+    if (empty(trim($_POST['categoria_id']))) {
+        $errors[] = "<li>O Categoria é obrigatorio</li>";
     }
 
     if (empty($errors)) {
@@ -55,7 +55,7 @@ if (!empty($_POST)) {
             }
             echo "<script>
                     setTimeout(
-                        ()=> window.location.href = 'UsuarioList.php', 1500
+                        ()=> window.location.href = 'PostList.php', 1500
                     )
                 </script>";
         } catch (Exception $e) {
@@ -105,25 +105,47 @@ if (!empty($_GET['id'])) {
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="" class="form-label">Nome</label>
-                        <input type="text" name="nome" value="<?php echo $data->nome ?? '' ?>" class="form-control">
+                        <label for="" class="form-label">Titulo</label>
+                        <input type="text" name="titulo" value="<?php echo $data->titulo ?? '' ?>" class="form-control">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="" class="form-label">Email</label>
-                        <input type="email" name="email" value="<?= $data->email ?? '' ?>" class="form-control">
+                        <label for="categoria_id" class="form-label">Categoria</label>
+                        <select name="categoria_id" class="form-select">
+                            <?php
+                            foreach ($categorias as $categoria) {
+                                ?>
+                                <option value="<?= $categoria->id ?>">
+                                    <?= $categoria->nome ?>
+                                </option>
+                                <?php
+                            }
+                            ?>
+                        </select>
                     </div>
+
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="" class="form-label">CPF</label>
-                        <input type="text" name="cpf" value="<?= $data->cpf ?? '' ?>" class="form-control">
+                        <label for="data_publicacao" class="form-label">Data Publicação</label>
+                        <input type="date" name="data_publicacao" class="form-control"
+                            value="<?= $data->data_publicacao ?? '' ?>" class="form-control">
                     </div>
                     <div class="col-md-6">
-                        <label for="" class="form-label">Telefone</label>
-                        <input type="text" name="telefone" value="<?= $data->telefone ?? '' ?>" class="form-control">
+
+                        <label for="status" class="form-label">Status</label>
+                        <select name="status" class="form-select">
+                            <option value="publicado">Publicado</option>
+                            <option value="nao_publico">Não Publicado</option>
+                        </select>
                     </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <label for="" class="form-label">Descrição</label>
+                    <textarea name="descricao" class="form-control"> <?= $data->descricao ?? '' ?></textarea>
                 </div>
 
                 <div class="row">
@@ -131,7 +153,7 @@ if (!empty($_GET['id'])) {
                         <button type="submit" class="btn btn-primary">
                             <?= !empty($_GET['id']) ? "Editar" : "Salvar" ?>
                         </button>
-                        <a href="./UsuarioList.php" class="btn btn-secondary">Voltar</a>
+                        <a href="./PostList.php" class="btn btn-secondary">Voltar</a>
                     </div>
                 </div>
 
