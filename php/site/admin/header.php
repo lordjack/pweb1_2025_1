@@ -13,7 +13,7 @@
 
 <body>
     <?php
-        include "./menu.php";
+        include_once "../menu.php";
     ?>
 
     <div class="container mt-5">

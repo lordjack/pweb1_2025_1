@@ -151,4 +151,23 @@ class db
 
         return $st->fetchAll(PDO::FETCH_CLASS);
     }
+
+    public function login($dados)
+    {
+        //SELECT * FROM usuario WHERE id = 8;
+        $conn = $this->conn();
+
+        $sql = "SELECT * FROM $this->table_name WHERE login = ?";
+
+        $st = $conn->prepare($sql);
+        $st->execute([$dados['login']]);
+
+        $result = $st->fetchObject();
+
+        if (password_verify($dados['senha'], $result->senha)) {
+            return $result;
+        } else {
+            return "error";
+        }
+    }
 }
