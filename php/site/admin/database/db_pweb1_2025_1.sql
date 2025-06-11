@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
 -- Copiando estrutura para tabela db_pweb1_2025_1.post
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(130) COLLATE utf8mb4_bin NOT NULL,
+  `titulo` varchar(130) COLLATE utf8mb4_bin NOT NULL,categoria
   `descricao` text COLLATE utf8mb4_bin NOT NULL,
   `data_publicacao` datetime NOT NULL,
   `status` varchar(10) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
@@ -44,14 +44,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 
-INSERT INTO `categoria` (`id`, `nome`) VALUES
-	(1, 'Esporte'),
-	(2, 'Política'),
-	(3, 'Gerais'),
-
-
-
-
+INSERT INTO `categoria` (`nome`) VALUES
+	('Esporte'),
+	('Política'),
+	('Gerais')
 
 
 
