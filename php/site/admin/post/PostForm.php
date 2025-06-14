@@ -4,6 +4,8 @@ include_once "../header.php";
 
 $db = new db('post');
 
+$db->checkLogin();
+
 $dbCategoria = new db('categoria');
 $categorias = $dbCategoria->all();
 
@@ -78,7 +80,7 @@ if (!empty($_GET['id'])) {
     </div>
 <?php } ?>
 
-<h3>Formulário Usuário</h3>
+<h3>Formulário Postagem</h3>
 <!-- http://localhost/pweb1_2025_1/php/site/admin/UsuarioForm.php -->
 <form action="" method="post">
     <input type="hidden" name="id" value="<?= $data->id ?? '' ?>">

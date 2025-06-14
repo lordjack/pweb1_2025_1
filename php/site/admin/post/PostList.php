@@ -4,6 +4,8 @@ include_once "../header.php";
 
 $db = new db('post');
 
+$db->checkLogin();
+
 if (!empty($_GET['id'])) {
     $db->destroy($_GET['id']);
 }
