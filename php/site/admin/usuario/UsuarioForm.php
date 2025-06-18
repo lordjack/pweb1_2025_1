@@ -55,18 +55,16 @@ if (!empty($_POST)) {
 
                 echo "<script>
                     setTimeout(
-                        ()=> window.location.href = 'home.php', 1500
+                        ()=> window.location.href = '../Login.php', 1500
                     )
                 </script>";
             } else {
                 $errors[] = "<li>A senha não coincidem. Tente novamente</li>";
             }
-
         } catch (Exception $e) {
             $errors[] = $e->getMessage();
         }
     }
-
 }
 
 if (!empty($_GET['id'])) {
@@ -145,13 +143,12 @@ if (!empty($_GET['id'])) {
 
     <div class="row">
         <div class="col mt-4">
-            <button type="submit" class="btn btn-primary">
-                Salvar
+            <button type="submit" class="btn btn-success">
+                <i class="fa-solid fa-floppy-disk"></i> Salvar
             </button>
-            <a href="./login.php" class="btn btn-secondary">Voltar</a>
+            <a href="../Login.php" class="btn btn-primary"> <i class="fa-solid fa-arrow-left"></i> Voltar</a>
         </div>
     </div>
-
 </form>
 
 

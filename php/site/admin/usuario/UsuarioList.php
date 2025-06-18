@@ -41,8 +41,8 @@ if (!empty($_POST)) {
 
                 <div class="row">
                     <div class="col mt-4">
-                        <button type="submit" class="btn btn-primary">Buscar</button>
-                        <a href="./UsuarioForm.php" class="btn btn-secondary">Cadastrar</a>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+                        <a href="./UsuarioForm.php" class="btn btn-success"><i class="fa-solid fa-plus"></i> Cadastrar</a>
                     </div>
                 </div>
 
@@ -73,12 +73,12 @@ if (!empty($_POST)) {
                             <td>$item->telefone</td>
                             <td>$item->email</td>
                             <td>
-                                <a href='./UsuarioForm.php?id=$item->id'>Editar</a>
+                                <a class='btn btn-warning' title='Editar' href='./UsuarioForm.php?id=$item->id'><i class='fa-solid fa-pen-to-square'></i></a>
                             </td>
                             <td>
-                                <a 
+                                <a class='btn btn-danger' title='Excluir'
                                     onclick='return confirm(\"Deseja Excluir?\")'
-                                    href='./UsuarioList.php?id=$item->id'>Deletar</a>
+                                    href='./UsuarioList.php?id=$item->id'><i class='fa-solid fa-trash'></i></a>
                             </td>
                         </tr>
                         ";
