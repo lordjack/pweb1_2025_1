@@ -1,0 +1,376 @@
+/* Custom CSS for Super Shock Bootstrap Theme */
+
+/* Root variables for consistent theming */
+:root {
+  --super-shock-primary: #020115;
+  --super-shock-secondary: #212121;
+  --super-shock-accent: #ffc107;
+  --super-shock-light: #f8f9fa;
+  --super-shock-dark: #000000;
+  --super-shock-gradient: linear-gradient(45deg, #020115, #1a1a2e, #16213e);
+  --super-shock-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom background class */
+.bg-super-shock {
+  background: var(--super-shock-gradient) !important;
+  position: relative;
+}
+
+.bg-super-shock::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 193, 7, 0.1) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Hero section styling */
+.hero-section {
+  background: var(--super-shock-gradient);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 193, 7, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 193, 7, 0.1) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.hero-image {
+  width: 200px;
+  height: 200px;
+  border: 4px solid var(--super-shock-accent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 193, 7, 0.5);
+}
+
+/* Text gradient effect */
+.text-gradient {
+  background: linear-gradient(45deg, #ffc107, #fff, #ffc107);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Navbar enhancements */
+.navbar-brand img {
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+  transform: rotate(360deg);
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+  border-radius: 20px;
+  margin: 0.2rem;
+  padding: 0.5rem 1rem !important;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: var(--super-shock-accent) !important;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: var(--super-shock-accent);
+  color: var(--super-shock-primary) !important;
+  font-weight: bold;
+}
+
+/* Offcanvas styling */
+.offcanvas.bg-super-shock {
+  background: var(--super-shock-gradient) !important;
+}
+
+/* Section styling */
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+section h2 {
+  position: relative;
+}
+
+section h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--super-shock-accent);
+  transition: width 0.3s ease;
+}
+
+section:hover h2::after {
+  width: 100px;
+}
+
+/* Image hover effects */
+.img-fluid {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.img-fluid:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+/* Button customizations */
+.btn-warning {
+  background: linear-gradient(45deg, #ffc107, #ffb300);
+  border: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-warning::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-warning:hover::before {
+  left: 100%;
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+/* Power list styling */
+.list-unstyled li {
+  transition: transform 0.2s ease, color 0.2s ease;
+  padding: 0.3rem 0;
+}
+
+.list-unstyled li:hover {
+  transform: translateX(10px);
+  color: var(--super-shock-accent) !important;
+}
+
+/* Footer styling */
+footer.bg-super-shock {
+  background: var(--super-shock-gradient) !important;
+  border-top: 2px solid var(--super-shock-accent);
+}
+
+/* Smooth scrolling offset for fixed navbar */
+section,
+header {
+  scroll-margin-top: 76px;
+}
+
+/* Loading animation for images */
+img {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .display-1 {
+    font-size: 3rem;
+  }
+
+  .navbar-brand span {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .display-1 {
+    font-size: 2.5rem;
+  }
+
+  section h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-gradient {
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: #ffffff;
+    text-shadow: var(--super-shock-text-shadow);
+  }
+}
+
+/* Focus indicators for better accessibility */
+.nav-link:focus,
+.btn:focus,
+a:focus {
+  outline: 2px solid var(--super-shock-accent);
+  outline-offset: 2px;
+}
+
+/* Custom utility classes */
+.text-super-shock {
+  color: var(--super-shock-primary) !important;
+}
+
+.bg-super-shock-light {
+  background-color: rgba(2, 1, 21, 0.1) !important;
+}
+
+.border-super-shock {
+  border-color: var(--super-shock-accent) !important;
+}
+
+/* Parallax effect for sections */
+.parallax-section {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Lightning effect for power section */
+.lightning-effect {
+  position: relative;
+}
+
+.lightning-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+      45deg,
+      transparent 40%,
+      rgba(255, 193, 7, 0.1) 50%,
+      transparent 60%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 40%,
+      rgba(255, 193, 7, 0.1) 50%,
+      transparent 60%
+    );
+  opacity: 0;
+  animation: lightning 4s infinite;
+  pointer-events: none;
+}
+
+@keyframes lightning {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 1;
+  }
+}
+
+/* Icon animations */
+.bi-lightning-fill {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Text selection styling */
+::selection {
+  background: var(--super-shock-accent);
+  color: var(--super-shock-primary);
+}
+
+::-moz-selection {
+  background: var(--super-shock-accent);
+  color: var(--super-shock-primary);
+}
